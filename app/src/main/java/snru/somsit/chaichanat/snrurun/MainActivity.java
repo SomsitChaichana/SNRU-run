@@ -17,4 +17,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this,SingUp.class));
     }
 
-}  //main Class
+}  //main Class  หน้าหลัก
