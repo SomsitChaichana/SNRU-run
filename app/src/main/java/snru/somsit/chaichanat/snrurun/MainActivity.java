@@ -7,21 +7,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
     //Explicit
     private MyManage myManage;
-
+    private ImageView imageView;
+    private EditText userEdiText, PasswordEdiText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Blind Widget
+        imageView = (ImageView) findViewById(R.id.imageView6);
+        userEdiText = (EditText) findViewById(R.id.editText4);
+        PasswordEdiText = (EditText) findViewById(R.id.editText5);
+
+
 
         myManage = new MyManage(MainActivity.this);
 
@@ -32,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         MySynchronize mySynchronize = new MySynchronize();
         mySynchronize.execute();
+
+        //Show logo
+        Picasso.with(MainActivity.this)
+                .load("http://swiftcodingthai.com/snru/image/logo_snru.png")
+                .resize(200,500)
+                .into(imageView);
 
     } //main Method
 
@@ -60,6 +80,25 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("Snru", "JSON==" + s);
+
+            try {
+
+                JSONArray jsonArray = new JSONArray();
+                for (int i=0;i<jsonArray.length();i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String strName = jsonObject.getString(myManage.column_name);
+                    String strUser = jsonObject.getString(myManage.column_user);
+                    String strPassword = jsonObject.getString(myManage.column_Password);
+                    String strAvata = jsonObject.getString(myManage.column_avata);
+
+                    myManage.addUser(strName, strUser, strPassword, strAvata);
+
+                }//for
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }//onPost
 
 
