@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
     private MyManage myManage;
     private ImageView imageView;
     private EditText userEdiText, PasswordEdiText;
+    private String userString, passwordString;
+
+    @Override
+    public void setSupportProgressBarIndeterminateVisibility(boolean visible) {
+        super.setSupportProgressBarIndeterminateVisibility(visible);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,21 @@ public class MainActivity extends AppCompatActivity {
                 .into(imageView);
 
     } //main Method
+
+    public void clickSignIn(View view) {
+
+        userString  = userEdiText.getText().toString().trim(); //ตัดช่องว่างหน้าหลัง
+        passwordString = PasswordEdiText.getText().toString().trim();
+
+        //check space
+        if (userString.equals("")|| passwordString.equals("") {
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "มีช่องว่าง","กรุณากรอกให้ครบทุกช่อง");
+
+        } else {
+
+        }
+    }//clickSignIn
 
     //Creat inner Class
     public class MySynchronize extends AsyncTask<Void, Void, String> {
