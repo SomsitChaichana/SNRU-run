@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
 
             MyAlert myAlert = new MyAlert();
-            myAlert.myDialog(this, "ไม่มีผู้ใช้", "ไม่มี"+userString+"ในฐานข้อมูล");
+            myAlert.myDialog(this, "ไม่มีผู้ใช้", "ไม่มี"+userString+"อยู่ในฐานข้อมูล");
 
 
         }
